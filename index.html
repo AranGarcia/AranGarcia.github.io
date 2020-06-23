@@ -14,7 +14,9 @@
 
 <body>
     <!-- Chat message area -->
-    <section>Chat messages go here</section>
+    <section>
+        <div id="chat-messages"></div>
+    </section>
 
     <!-- Text input area -->
     <section>
@@ -26,12 +28,15 @@
                 <input id="chat-input" type="text" class="form-control" placeholder="Introduce tu mensaje aqu&iacute;."
                     aria-describedby="basic-addon1">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="prepareMessage()">Enviar</button>
+                    <button class="btn btn-outline-secondary" type="button" id="button-addon2"
+                        onclick="prepareMessage()">Enviar</button>
                 </div>
             </div>
         </div>
-
     </section>
+
+    <footer><a target="_blank" href="https://icons8.com/icons/set/bot">Bot icon</a> icon by <a target="_blank"
+            href="https://icons8.com">Icons8</a></footer>
 
     <!-- Bootstrap stuff -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
