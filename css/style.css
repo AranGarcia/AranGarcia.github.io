@@ -2,9 +2,9 @@ textarea {
     resize: none;
 }
 
-/* Chat chat-bubbles */
+/* Chat chat-containers */
 
-.chat-bubble {
+.chat-container {
     border: 2px solid #dedede;
     background-color: #f1f1f1;
     border-radius: 5px;
@@ -12,7 +12,7 @@ textarea {
     margin: 10px 0;
 }
 
-/* Darker chat-bubble */
+/* Darker chat-container */
 
 .darker {
     border-color: #ccc;
@@ -21,7 +21,7 @@ textarea {
 
 /* Clear floats */
 
-.chat-bubble::after {
+.chat-container::after {
     content: "";
     clear: both;
     display: table;
@@ -29,7 +29,7 @@ textarea {
 
 /* Style images */
 
-.chat-bubble img {
+.chat-container img {
     float: left;
     max-width: 60px;
     width: 100%;
@@ -39,7 +39,7 @@ textarea {
 
 /* Style the right image */
 
-.chat-bubble img.right {
+.chat-container img.right {
     float: right;
     margin-left: 20px;
     margin-right: 0;

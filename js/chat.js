@@ -3,11 +3,16 @@ window.onload = function () {
         // Allow messages to be sent when pressing ENTER
         "keypress", function (event) {
             if (event.keyCode == 13) {
-                prepareMessage();
+                sendMessage();
             }
         }
     );
 }
+
+// Constants
+const URL = "http://localhost:5005/model/parse/";
+const Http = new XMLHttpRequest();
+
 
 // Date format constant variables
 const options = {
@@ -15,23 +20,36 @@ const options = {
 };
 const dateTimeFmt = new Intl.DateTimeFormat('es-MX', options).format;
 
-function prepareMessage() {
+/*
+sendMessage extracts the text from the input box, sends an HTTP request to the
+interpreter and updates the converation section according to the response from the
+server.
+*/
+function sendMessage() {
+    // First extract the text
     element = document.getElementById("chat-input");
     text = element.value;
-    createChatBubble(text);
+
+    // Add a chat container
+    createContainer(text);
     element.value = "";
+
+    // Send request to HTTP Server
+    sendRequest(text);
 }
 
-function createChatBubble(textInput) {
+function createContainer(textInput) {
     var messagesContainer = document.getElementById("chat-messages");
 
     // The chat bubble
     var newMessageDiv = document.createElement("div");
-    newMessageDiv.className = "chat-bubble"
+    newMessageDiv.className = "chat-container"
 
     // Avatar icon
-    var avatarIcon = document.createElement("img");
-    avatarIcon.src = "img/avatar.png"
+    // XXX: Leave or delete it
+    // var avatarIcon = document.createElement("img");
+    // avatarIcon.src = "img/avatar.png"
+    // avatarIcon.className = "right"
 
     // Text element
     var textMessageP = document.createElement("p");
@@ -40,11 +58,19 @@ function createChatBubble(textInput) {
     // Time element
     var date = new Date();
     var timeSpan = document.createElement("span")
-    timeSpan.className = "time-right"
     timeSpan.innerHTML = dateTimeFmt(date);
 
     newMessageDiv.appendChild(textMessageP);
-    newMessageDiv.appendChild(avatarIcon);
+    // newMessageDiv.appendChild(avatarIcon);
     newMessageDiv.appendChild(timeSpan);
     messagesContainer.appendChild(newMessageDiv);
+}
+
+function sendRequest(text) {
+    Http.open("POST", URL);
+    Http.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    Http.send(JSON.stringify({ "text": text}));
+    Http.onreadystatechange = (e) => {
+        console.log(Http.responseText)
+    }
 }
